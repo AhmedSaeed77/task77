@@ -16,7 +16,9 @@
 
                     {{ __('You are logged in!') }}
                 </div>
+
             </div>
+            <a href="{{ route('posts.index') }}" class="btn btn-primary mt-3">Posts</a>
         </div>
     </div>
 </div>
