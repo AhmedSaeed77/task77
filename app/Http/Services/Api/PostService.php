@@ -4,6 +4,7 @@ namespace App\Http\Services\Api;
 use App\Models\Post;
 use App\Http\Requests\Api\Post\PostRequest;
 use Exception;
+use App\Http\Resources\PostResource;
 use Illuminate\Support\Facades\DB;
 
 class PostService
@@ -12,7 +13,8 @@ class PostService
     public function index()
     {
         $posts = Post::all();
-        return response()->json(['posts' => $posts]);
+        $posts_data = PostResource::collection($posts);
+        return response($posts_data, 200);
     }
 
 
@@ -36,7 +38,8 @@ class PostService
     public function show($id)
     {
         $post = Post::find($id);
-        return response()->json(['post' => $post]);
+        $post_data = new PostResource($post);
+        return response($post_data, 200);
     }
 
     public function destroy($id)
